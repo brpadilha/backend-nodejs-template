@@ -5,14 +5,17 @@ class User extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.string,
+        name: Sequelize.STRING,
+        sex: Sequelize.STRING,
+        hair_color: Sequelize.STRING,
+        password: Sequelize.STRING,
       },
       {
         sequelize,
       }
     );
-    //password hash
-    this.addHook('beforeSave', async (client) => {
+    // password hash
+    this.addHook('beforeSave', async client => {
       if (client.password) {
         client.password_hash = await bcrypt.hash(client.password, 8);
       }

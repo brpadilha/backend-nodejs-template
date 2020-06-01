@@ -1,20 +1,17 @@
 import { Router } from 'express';
 
-import ClientController from './app/Controllers/ClientController';
+import UserController from './app/Controllers/UserController';
 import SessionController from './app/Controllers/SessionController';
 
 import authMiddleware from './app/middlewares/auth';
-import TransactionController from './app/Controllers/TransactionController';
 
 const routes = new Router();
 
-routes.post('/clients', ClientController.store);
+routes.post('/clients', UserController.store);
 routes.post('/sessions', SessionController.store);
-routes.get('/clients', ClientController.index);
+routes.get('/clients', UserController.index);
+routes.get('/clientsFilter', UserController.filter);
 
 routes.use(authMiddleware);
-routes.get('/transactions', TransactionController.index);
-
-routes.post('/transactions', TransactionController.store);
 
 export default routes;

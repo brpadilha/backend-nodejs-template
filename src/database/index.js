@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 import mongoose from 'mongoose';
-import Client from '../app/models/Client';
+import User from '../app/models/User';
 import databaseConfig from '../config/database';
 
-const models = [Client];
+const models = [User];
 
 class Database {
   constructor() {

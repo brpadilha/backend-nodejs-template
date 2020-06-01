@@ -6,7 +6,9 @@ class UserController {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       cpf: Yup.string().required(),
-      password: Yup.string().required().min(6),
+      password: Yup.string()
+        .required()
+        .min(6),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -34,6 +36,23 @@ class UserController {
       attributes: ['id', 'name', 'cpf', 'balance'],
     });
     return res.json(users);
+  }
+
+  async filter(req, res) {
+    const { id, name, hair_color, sex } = req.query;
+
+    const where = {};
+
+    if (id) where.id = id;
+    if (name) where.name = name;
+    if (sex) where.sex = sex;
+    if (hair_color) where.hair_color = hair_color;
+
+    const data = User.findAll({
+      where,
+    });
+
+    return res.status(200).json(data);
   }
 }
 
