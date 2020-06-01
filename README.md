@@ -10,10 +10,8 @@
 
 - Undo migration
   \$ yarn sequelize db:migrate:undo
-
-or
-
-\$ yarn sequelize db:migrate:undo:all
+  or
+  \$ yarn sequelize db:migrate:undo:all
 
 # Mongo schemas
 
