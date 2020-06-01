@@ -7,36 +7,19 @@ import User from '../models/User';
 
 class SessionController {
   async store(req, res) {
-    const schema = Yup.object().shape({
-      // id: Yup.number().required(),
-      cpf: Yup.string().required(),
-      password: Yup.string().required(),
-    });
+    const { name, password } = req.body;
 
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-    const { cpf, password } = req.body;
-
-    const user = await User.findOne({ where: { cpf } });
-
-    if (!user) {
-      return res.status(400).json({ error: 'User not found' });
-    }
+    const user = User.findOne({ where: name });
 
     if (!(await user.checkPassword(password))) {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, balance, manager } = user;
-
+    const { id } = user;
     return res.json({
       user: {
         id,
         name,
-        cpf,
-        balance,
-        manager,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
