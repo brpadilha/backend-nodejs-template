@@ -1,4 +1,4 @@
-# GEN - A Back-end NodeJS Template using Express, Mongo + mongoose and Postgres + sequelize
+# A Back-end NodeJS Template using Express, Mongo + mongoose and Postgres + sequelize
 
 # Postgres sequelize migrations
 
